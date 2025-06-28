@@ -1,0 +1,24 @@
+version: "3.7"
+
+networks:
+  v6net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "fd00:dead:beef::/64"
+
+services:
+  c1:
+    image: alpine
+    command: sh -c "sleep infinity"
+    networks:
+      v6net:
+        ipv6_address: "fd00:dead:beef::11"
+
+  c2:
+    image: alpine
+    command: sh -c "sleep infinity"
+    networks:
+      v6net:
+        ipv6_address: "fd00:dead:beef::22"
